@@ -1,10 +1,10 @@
-package Client;
+package client;
 /* Author:  Anand Tripathi - Example program code for CSCI 5105 Spring 2021     */
 
 import java.net.*;
 import java.io.*;
 
-public class EchoClient   {
+public class TCPClient   {
 
   protected String host, file;
   protected int port;

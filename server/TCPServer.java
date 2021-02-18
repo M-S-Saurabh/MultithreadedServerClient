@@ -1,13 +1,13 @@
-package Server;
+package server;
 /* Author:  Anand Tripathi - Example program code for CSCI 5105 Spring 2021     */
 
 import java.net.*;
 import java.io.*;
 
-public class EchoServer extends Thread {
+public class TCPServer implements Runnable {
   protected Socket s;
 
-  EchoServer (Socket s) {
+  TCPServer (Socket s) {
     System.out.println ("New client.");
     this.s = s;
   }
@@ -56,8 +56,8 @@ public class EchoServer extends Thread {
       Socket client = server.accept ();
       System.out.println( "Received request from " + client.getInetAddress ());
       System.out.println( "Starting worker thread..." );
-      EchoServer c = new EchoServer (client);
-      c.start ();
+      TCPServer c = new TCPServer (client);
+      new Thread(c).start();
     }
   }
 }
