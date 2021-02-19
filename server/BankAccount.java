@@ -1,7 +1,7 @@
 package server;
 
 public class BankAccount {
-	static int uidCounter = 0;
+	private static int uidCounter = 0;
 	public final int UID;
 	private int balance;
 	
