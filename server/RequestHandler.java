@@ -12,6 +12,8 @@ import shared.DepositRequest;
 import shared.DepositResponse;
 import shared.Request;
 import shared.Response;
+import shared.TransferRequest;
+import shared.TransferResponse;
 
 public class RequestHandler {
 	
@@ -38,20 +40,33 @@ public class RequestHandler {
 	        case Constants.DEPOSIT_REQUEST:
 	        	response = deposit((DepositRequest) request);
 	        	break;
-	    	/*
-	    	 * .
-	    	 * .
-	    	 * .
-	    	 * more methods here.
-	    	 */
+	        case Constants.TRANSFER_REQUEST:
+	        	response = transfer((TransferRequest) request);
+	        	break;
 	    	default:
 	    		logger.severe("Operation "+operationName+" not implemented. Response is null.");
         }
 		return response;
 	}
 	
+	private Response transfer(TransferRequest request) {
+		BankAccount source = accounts.get(request.getSource());
+		BankAccount target = accounts.get(request.getTarget());
+		int amount = request.getAmount();
+		
+		TransferResponse response = new TransferResponse(request.requestId, request.getOperationName(), Constants.OK_STATUS);
+		
+		if(amount <= source.getBalance()) {
+			source.setBalance(source.getBalance() - amount);
+			target.setBalance(target.getBalance() + amount);
+		}else {
+			response.setStatus(Constants.FAIL_STATUS);
+			response.setMessage(Constants.INSUFFICIENT_BALANCE);
+		}
+		return response;
+	}
+
 	private Response getBalance(BalanceRequest request) {
-		// TODO Auto-generated method stub
 		int accID = request.getUid();
 		int balance = accounts.get(accID).getBalance();
 		Response response = new BalanceResponse(request.requestId, accID, request.getOperationName(), balance);

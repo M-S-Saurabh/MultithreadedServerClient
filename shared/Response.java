@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Response implements Serializable {
 	public final int requestId;
 	private String operationName;
+	private String message;
 	
 	public Response(int requestId, String operationName) {
 		this.requestId = requestId;
@@ -17,5 +18,13 @@ public class Response implements Serializable {
 
 	public void setOperationName(String operationName) {
 		this.operationName = operationName;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

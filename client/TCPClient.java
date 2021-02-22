@@ -21,17 +21,17 @@ public class TCPClient   {
 	
 	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
-	private static List<Integer> accountIDS;
+	private static List<Integer> accountIds;
 	protected String host, file;
 	protected int port;
 
 	public static void main (String args[]) throws IOException {
 
-		if (args.length != 2) {
-			throw new RuntimeException("hostname and port number as arguments" );
+		if (args.length != 4) {
+			throw new RuntimeException("Correct usage is 'java BankClient serverHostname severPortnumber threadCount iterationCount'" );
 		}
 		
-	    accountIDS = new ArrayList<Integer>();
+	    accountIds = new ArrayList<Integer>();
 		
 		// This block configure the logger with handler and formatter  
         FileHandler fh = new FileHandler("./ClientLogFile.log");  
@@ -52,46 +52,31 @@ public class TCPClient   {
 		ObjectInputStream oin = new ObjectInputStream(in);
 		logger.info("Connected.");
 		
-		// Create 100 accounts.
-		List<CreateAccountResponse> responseListCreate = createAccounts(100, oin, oos);
+		// Creating 100 accounts.
+		createAccounts(100, oin, oos);
 		
-		StringBuilder sbR = new StringBuilder("Created account ids: ");
-		for(CreateAccountResponse response: responseListCreate) {
-			int accID = response.getUid();
-			sbR.append(accID);
-			sbR.append(" ");
-			accountIDS.add(accID);
-		}
-		logger.info(sbR.toString());
-		
-		List<DepositResponse> responseListDeposit = depositInAccount(oin, oos);
-		
-		StringBuilder sbD = new StringBuilder("Deposit successful for: ");
-	    for (DepositResponse response: responseListDeposit) {
-	    	if (response.getStatus().equals(Constants.OK_STATUS)) {
-	    		sbD.append(response.getUid());
-	    		sbD.append(" ");
-	    	}
-	    }
-	    logger.info(sbD.toString());
+		// Depositing 100 in each account.
+		depositInAccount(oin, oos);
 	    
-	    List<BalanceResponse> responseListBalance = checkBalance(oin, oos);
-	    StringBuilder sbB = new StringBuilder("Checking balance:");
-	    int total = 0;
-	    for (BalanceResponse response: responseListBalance) {
-			/*
-			 * sbB.append("account: "); sbB.append(response.getUid());
-			 * sbB.append(" balance: "); sbB.append(response.getBalance());
-			 * sbB.append("\n");
-			 */
-	    	total += response.getBalance();
-	    }
-	    logger.info(sbB.toString());
-	    logger.info("total balance: "+total);
+	    // Checking balance for all accounts.
+	    checkBalance(oin, oos);
+		
+		int threadCount = Integer.parseInt(args[2]);
+		int iterationCount = Integer.parseInt(args[3]);
+		// Spawn off threads to do the transfer tasks.
+		for(int i=0; i<threadCount; i++) {
+			TCPClientThread c = new TCPClientThread(accountIds, iterationCount, new Socket (host, port));
+			new Thread(c).start();
+		}
+		
+		// Check balance again.
+		checkBalance(oin, oos);
+		
+		// Tasks alloted to the main thread end here. 
 		socket.close();
 	}
 
-	private static List<CreateAccountResponse> createAccounts(int numAccounts, ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
+	private static void createAccounts(int numAccounts, ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
 	
 		List<CreateAccountResponse> responseList = new ArrayList<CreateAccountResponse>();
 		
@@ -104,14 +89,24 @@ public class TCPClient   {
 				e.printStackTrace();
 			}
 		}
-		return responseList;
+		
+		// Parsing results and writing logs.
+		StringBuilder sbR = new StringBuilder("Created account ids: ");
+		for(CreateAccountResponse response: responseList) {
+			int accID = response.getUid();
+			sbR.append(accID);
+			sbR.append(" ");
+			// Take note of IDs of all the created accounts.
+			accountIds.add(accID);
+		}
+		logger.info(sbR.toString());
 	}
 	
-	private static List<DepositResponse> depositInAccount(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
+	private static void depositInAccount(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
 	
 		List<DepositResponse> responseList = new ArrayList<DepositResponse>();
 		
-		for (int accID: accountIDS) {
+		for (int accID: accountIds) {
 			oos.writeObject(new DepositRequest(accID, 100));
 			try {
 				responseList.add((DepositResponse) oin.readObject());
@@ -120,13 +115,22 @@ public class TCPClient   {
 				e.printStackTrace();
 			}
 		}
-		return responseList;
+		
+		// Parsing results and writing logs.
+		StringBuilder sbD = new StringBuilder("Deposit successful for: ");
+	    for (DepositResponse response: responseList) {
+	    	if (response.getStatus().equals(Constants.OK_STATUS)) {
+	    		sbD.append(response.getUid());
+	    		sbD.append(" ");
+	    	}
+	    }
+	    logger.info(sbD.toString());
 	}
 	
-	private static List<BalanceResponse> checkBalance(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
+	private static void checkBalance(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
 		List<BalanceResponse> responseList = new ArrayList<BalanceResponse>();
 		
-		for (int accID: accountIDS) {
+		for (int accID: accountIds) {
 			oos.writeObject(new BalanceRequest(accID));
 			try {
 				responseList.add((BalanceResponse) oin.readObject());
@@ -135,6 +139,20 @@ public class TCPClient   {
 				e.printStackTrace();
 			}
 		}
-		return responseList;
+		
+		// Parse results and calculate sum of all balances.
+		// Write results into logs.
+		StringBuilder sbB = new StringBuilder("Checking balance:");
+	    int total = 0;
+	    for (BalanceResponse response: responseList) {
+			/*
+			 * sbB.append("account: "); sbB.append(response.getUid());
+			 * sbB.append(" balance: "); sbB.append(response.getBalance());
+			 * sbB.append("\n");
+			 */
+	    	total += response.getBalance();
+	    }
+	    logger.info(sbB.toString());
+	    logger.info("Total balance is: "+total);
 	}
 }

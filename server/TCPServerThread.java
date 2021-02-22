@@ -47,6 +47,7 @@ public class TCPServerThread implements Runnable {
 			catch (SocketTimeoutException exc)
 			{
 			    // you got the timeout
+				logger.severe("connection timeout");
 				exc.printStackTrace();
 				logger.severe(exc.getMessage());
 			}

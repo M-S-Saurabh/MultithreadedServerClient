@@ -30,7 +30,7 @@ public class TCPServer{
 
 		while (true) {
 			logger.info("Waiting for a client request");
-			Socket client = server.accept ();
+			Socket client = server.accept();
 			logger.info( "Received request from " + client.getInetAddress ());
 			logger.info( "Starting worker thread..." );
 			TCPServerThread c = new TCPServerThread(client, accounts);

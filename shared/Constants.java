@@ -13,4 +13,6 @@ public final class Constants {
 	public static final String OK_STATUS = "OK";
 	public static final String FAIL_STATUS = "FAIL";
 	
+	
+	public static final String INSUFFICIENT_BALANCE = "In-sufficient balance in source account.";
 }
