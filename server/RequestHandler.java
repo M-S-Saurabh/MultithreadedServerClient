@@ -1,6 +1,6 @@
 package server;
 
-import java.util.List;
+import java.util.Hashtable;
 import java.util.logging.Logger;
 
 import shared.Constants;
@@ -9,11 +9,11 @@ import shared.Request;
 import shared.Response;
 
 public class RequestHandler {
-	protected List<BankAccount> accounts;
+	protected Hashtable<Integer, BankAccount> accounts;
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
-	public RequestHandler(List<BankAccount> accounts) {
-		this.accounts = accounts;
+	public RequestHandler(Hashtable<Integer, BankAccount> accounts2) {
+		this.accounts = accounts2;
 	}
 	
 	Response handle(Request request) {
@@ -49,7 +49,7 @@ public class RequestHandler {
 	private Response createAccount(Request request) {
 		BankAccount newAccount = new BankAccount();
         logger.info("New Account created uid:"+newAccount.UID);
-        this.accounts.add(newAccount);
+        this.accounts.put(newAccount.UID, newAccount);
         Response response = new CreateAccountResponse(request.requestId, request.getOperationName(), newAccount.UID);
 		return response;
 	}

@@ -2,9 +2,7 @@ package server;
 /* Author:  Anand Tripathi - Example program code for CSCI 5105 Spring 2021     */
 
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Hashtable;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -28,7 +26,7 @@ public class TCPServer{
 		ServerSocket server = new ServerSocket (Integer.parseInt (args[0]));
 
 		// Accounts list
-		List<BankAccount> accounts = Collections.synchronizedList(new ArrayList<BankAccount>());
+		Hashtable<Integer, BankAccount> accounts = new Hashtable<Integer, BankAccount>(100);
 
 		while (true) {
 			logger.info("Waiting for a client request");

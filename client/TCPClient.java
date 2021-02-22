@@ -19,8 +19,6 @@ public class TCPClient   {
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	public static void main (String args[]) throws IOException {
-		InetAddress server  = null;
-		Socket sock = null;
 
 		if ( args.length != 2 ) {
 			throw new RuntimeException( "hostname and port number as arguments" );

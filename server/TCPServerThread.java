@@ -8,10 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.List;
+import java.util.Hashtable;
 import java.util.logging.Logger;
 
-import shared.CreateAccountResponse;
 import shared.Request;
 import shared.Response;
 
@@ -21,7 +20,7 @@ public class TCPServerThread implements Runnable {
 	protected RequestHandler requestHandler;
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-	TCPServerThread (Socket s, List<BankAccount> accounts) {
+	TCPServerThread (Socket s, Hashtable<Integer, BankAccount> accounts) {
 		logger.info("ServerThread created for new client.");
 		this.s = s;
 		this.requestHandler = new RequestHandler(accounts);
