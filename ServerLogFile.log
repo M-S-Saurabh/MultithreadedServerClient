@@ -1,0 +1,208 @@
+Feb 21, 2021 7:46:52 PM server.TCPServer main
+INFO: Starting on port 9091
+Feb 21, 2021 7:46:58 PM server.TCPServerThread <init>
+INFO: New client detected. New server thread is created.
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.RequestHandler handle
+INFO: Request operation name:create_account
+Feb 21, 2021 7:46:58 PM server.TCPServerThread run
+INFO: End of Object stream is reached. Done with all requests from client.
+Feb 21, 2021 7:46:58 PM server.TCPServerThread run
+INFO: Client exit. Server thread exit.

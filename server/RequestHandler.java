@@ -1,6 +1,7 @@
 package server;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import shared.Constants;
 import shared.CreateAccountResponse;
@@ -9,6 +10,7 @@ import shared.Response;
 
 public class RequestHandler {
 	protected List<BankAccount> accounts;
+	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	public RequestHandler(List<BankAccount> accounts) {
 		this.accounts = accounts;
@@ -16,7 +18,7 @@ public class RequestHandler {
 	
 	Response handle(Request request) {
 		String operationName = request.getOperationName();
-		System.out.println("Request operation name:"+operationName);
+		logger.info("Request operation name:"+operationName);
 		
 		Response response = null;
         switch(operationName) 
@@ -34,7 +36,7 @@ public class RequestHandler {
 	    	 * more methods here.
 	    	 */
 	    	default:
-	    		System.out.println("Method not implemented. Response");
+	    		logger.severe("Operation "+operationName+" not implemented. Response is null.");
         }
 		return response;
 	}
@@ -46,7 +48,7 @@ public class RequestHandler {
 
 	private Response createAccount(Request request) {
 		BankAccount newAccount = new BankAccount();
-        System.out.println("New Account created uid:"+newAccount.UID);
+        logger.info("New Account created uid:"+newAccount.UID);
         this.accounts.add(newAccount);
         Response response = new CreateAccountResponse(request.requestId, request.getOperationName(), newAccount.UID);
 		return response;

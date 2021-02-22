@@ -3,6 +3,9 @@ package client;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import shared.CreateAccountRequest;
 import shared.CreateAccountResponse;
@@ -13,6 +16,7 @@ public class TCPClient   {
 
 	protected String host, file;
 	protected int port;
+	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	public static void main (String args[]) throws IOException {
 		InetAddress server  = null;
@@ -21,14 +25,20 @@ public class TCPClient   {
 		if ( args.length != 2 ) {
 			throw new RuntimeException( "hostname and port number as arguments" );
 		}
+		
+		// This block configure the logger with handler and formatter  
+        FileHandler fh = new FileHandler("./ClientLogFile.log");  
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();  
+        fh.setFormatter(formatter); 
 
 		String host = args[0];
 		int  port = Integer.parseInt( args[1] );
 
-		System.out.println ("Connecting to " + host + ":" + port + "..");
+		logger.info("Connecting to " + host + ":" + port + "..");
 
 		Socket socket = new Socket (host, port);
-		System.out.println ("Connected.");
+		logger.info("Connected.");
 		
 		// Create 100 accounts.
 		List<CreateAccountResponse> responseList = createAccounts(100, socket);
@@ -39,7 +49,7 @@ public class TCPClient   {
 			resultString += responseList.get(i).getUid();
 			resultString += " ";
 		}
-		System.out.println(resultString);
+		logger.info("Result string: "+resultString);
 	}
 
 	private static List<CreateAccountResponse> createAccounts(int numAccounts, Socket socket) throws IOException {

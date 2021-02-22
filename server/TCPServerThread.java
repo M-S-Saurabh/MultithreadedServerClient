@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import shared.CreateAccountResponse;
 import shared.Request;
@@ -18,9 +19,10 @@ public class TCPServerThread implements Runnable {
 
 	protected Socket s;
 	protected RequestHandler requestHandler;
+	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	TCPServerThread (Socket s, List<BankAccount> accounts) {
-		System.out.println("New client.");
+		logger.info("ServerThread created for new client.");
 		this.s = s;
 		this.requestHandler = new RequestHandler(accounts);
 	}
@@ -47,25 +49,28 @@ public class TCPServerThread implements Runnable {
 			{
 			    // you got the timeout
 				exc.printStackTrace();
+				logger.severe(exc.getMessage());
 			}
 			catch (EOFException exc)
 			{
 			    // end of stream
-				System.out.println("End of Object stream is reached.");
+				logger.info("End of Object stream is reached. Done with all requests from client.");
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				logger.severe(e.getMessage());
 			}
 			
-			System.out.println ("Client exit.");
+			logger.info("Client exit. ServerThread exit.");
 			s.close();
 		} catch (IOException ex) {
 			ex.printStackTrace ();
+			logger.severe(ex.getMessage());
 		} finally {
 			try {
 				s.close ();
 			} catch (IOException ex) {
 				ex.printStackTrace ();
+				logger.severe(ex.getMessage());
 			}
 		}
 	}
