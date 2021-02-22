@@ -16,14 +16,22 @@ import shared.Response;
 
 public class TCPServerThread implements Runnable {
 
+	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
+	private static int THREADCOUNT = 1;
+	
+	private int threadID;
+	
 	protected Socket s;
 	protected RequestHandler requestHandler;
-	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 
 	TCPServerThread (Socket s, Hashtable<Integer, BankAccount> accounts) {
 		logger.info("ServerThread created for new client.");
 		this.s = s;
-		this.requestHandler = new RequestHandler(accounts);
+		this.threadID = THREADCOUNT;
+		this.requestHandler = new RequestHandler(accounts, this.threadID);
+		THREADCOUNT++;
 	}
 
 	public void run () {
@@ -47,30 +55,30 @@ public class TCPServerThread implements Runnable {
 			catch (SocketTimeoutException exc)
 			{
 			    // you got the timeout
-				logger.severe("connection timeout");
+				logger.severe("t"+this.threadID+": connection timeout");
 				exc.printStackTrace();
 				logger.severe(exc.getMessage());
 			}
 			catch (EOFException exc)
 			{
 			    // end of stream
-				logger.info("End of Object stream is reached. Done with all requests from client.");
+				logger.fine("t"+this.threadID+": End of Object stream is reached. Done with all requests from client.");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				logger.severe(e.getMessage());
 			}
 			
-			logger.info("Client exit. ServerThread exit.");
+			logger.info("t"+this.threadID+": Client exit. ServerThread exit.");
 			s.close();
 		} catch (IOException ex) {
 			ex.printStackTrace ();
-			logger.severe(ex.getMessage());
+			logger.severe("t"+this.threadID+": "+ex.getMessage());
 		} finally {
 			try {
 				s.close ();
 			} catch (IOException ex) {
 				ex.printStackTrace ();
-				logger.severe(ex.getMessage());
+				logger.severe("t"+this.threadID+": "+ex.getMessage());
 			}
 		}
 	}

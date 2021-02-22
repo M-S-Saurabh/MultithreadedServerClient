@@ -66,7 +66,7 @@ public class TCPClientThread implements Runnable {
 					logger.severe(String.format("Transfer request failed. SourceID:%d TargetID:%d", first, second));
 					logger.severe(String.format("Failure Reason: %s", response.getMessage()));
 				}else {
-					logger.info(String.format("Transfer of 10$ from id:%d to id:%d successful.", first, second));
+					logger.fine(String.format("Transfer of 10$ from id:%d to id:%d successful.", first, second));
 				}
 				
 			} catch (IOException e) {
@@ -82,6 +82,7 @@ public class TCPClientThread implements Runnable {
 		
 		try {
 			socket.close();
+			logger.info("Connection closed.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

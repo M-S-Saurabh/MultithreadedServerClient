@@ -17,16 +17,21 @@ import shared.TransferResponse;
 
 public class RequestHandler {
 	
-	protected Hashtable<Integer, BankAccount> accounts;
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
-	public RequestHandler(Hashtable<Integer, BankAccount> accounts) {
+	private int threadID;
+	
+	protected Hashtable<Integer, BankAccount> accounts;
+	
+	
+	public RequestHandler(Hashtable<Integer, BankAccount> accounts, int threadID) {
 		this.accounts = accounts;
+		this.threadID = threadID;
 	}
 	
 	Response handle(Request request) {
 		String operationName = request.getOperationName();
-		logger.info("Request operation name:"+operationName);
+		logger.finer("t"+this.threadID+"|r"+request.requestId+": Request operation name:"+operationName);
 		
 		Response response = null;
         switch(operationName) 
@@ -44,7 +49,7 @@ public class RequestHandler {
 	        	response = transfer((TransferRequest) request);
 	        	break;
 	    	default:
-	    		logger.severe("Operation "+operationName+" not implemented. Response is null.");
+	    		logger.severe("t"+this.threadID+"|r"+request.requestId+": Operation "+operationName+" not implemented. Response is null.");
         }
 		return response;
 	}
@@ -75,7 +80,7 @@ public class RequestHandler {
 
 	private Response createAccount(CreateAccountRequest request) {
 		BankAccount newAccount = new BankAccount();
-        logger.info("New Account created uid:"+newAccount.UID);
+        logger.fine("t"+this.threadID+"|r"+request.requestId+": New Account created uid:"+newAccount.UID);
         this.accounts.put(newAccount.UID, newAccount);
         Response response = new CreateAccountResponse(request.requestId, request.getOperationName(), newAccount.UID);
 		return response;

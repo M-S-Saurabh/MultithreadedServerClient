@@ -2,6 +2,7 @@ package client;
 
 import java.net.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -65,9 +66,23 @@ public class TCPClient   {
 		int threadCount = Integer.parseInt(args[2]);
 		int iterationCount = Integer.parseInt(args[3]);
 		// Spawn off threads to do the transfer tasks.
+		
+		List<Thread> transferThreads = new LinkedList<>();
 		for(int i=0; i<threadCount; i++) {
 			TCPClientThread c = new TCPClientThread(accountIds, iterationCount, new Socket (host, port));
-			new Thread(c).start();
+			Thread txThread = new Thread(c);
+			txThread.start();
+			transferThreads.add(txThread);
+		}
+		
+		for (Thread thread: transferThreads) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				logger.severe("join failed");
+				e.printStackTrace();
+			}
 		}
 		
 		// Check balance again.
