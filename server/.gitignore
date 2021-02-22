@@ -3,3 +3,4 @@
 /BankAccount.class
 /TCPServerThread.class
 /RequestHandler.class
+/RMIBankServerImpl.class

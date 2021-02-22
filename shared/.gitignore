@@ -11,3 +11,4 @@
 /CreateAccountResponse.class
 /DepositResponse.class
 /TransferResponse.class
+/RMIBankServer.class
