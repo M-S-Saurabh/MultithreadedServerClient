@@ -6,6 +6,7 @@ public class BalanceRequest extends Request {
 
 	public BalanceRequest(int uid) {
 		super(Constants.BALANCE_REQUEST);
+		this.setUid(uid);
 	}
 
 	public int getUid() {

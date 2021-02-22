@@ -4,16 +4,22 @@ import java.util.Hashtable;
 import java.util.logging.Logger;
 
 import shared.Constants;
+import shared.BalanceRequest;
+import shared.BalanceResponse;
+import shared.CreateAccountRequest;
 import shared.CreateAccountResponse;
+import shared.DepositRequest;
+import shared.DepositResponse;
 import shared.Request;
 import shared.Response;
 
 public class RequestHandler {
+	
 	protected Hashtable<Integer, BankAccount> accounts;
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
-	public RequestHandler(Hashtable<Integer, BankAccount> accounts2) {
-		this.accounts = accounts2;
+	public RequestHandler(Hashtable<Integer, BankAccount> accounts) {
+		this.accounts = accounts;
 	}
 	
 	Response handle(Request request) {
@@ -24,10 +30,13 @@ public class RequestHandler {
         switch(operationName) 
         {
 	        case Constants.CREATE_ACCOUNT_REQUEST:
-	        	response = createAccount(request);
+	        	response = createAccount((CreateAccountRequest) request);
 	        	break;
 	        case Constants.BALANCE_REQUEST:
-	        	response = getBalance(request);
+	        	response = getBalance((BalanceRequest) request);
+	        	break;
+	        case Constants.DEPOSIT_REQUEST:
+	        	response = deposit((DepositRequest) request);
 	        	break;
 	    	/*
 	    	 * .
@@ -41,16 +50,27 @@ public class RequestHandler {
 		return response;
 	}
 	
-	private Response getBalance(Request request) {
+	private Response getBalance(BalanceRequest request) {
 		// TODO Auto-generated method stub
-		return null;
+		int accID = request.getUid();
+		int balance = accounts.get(accID).getBalance();
+		Response response = new BalanceResponse(request.requestId, accID, request.getOperationName(), balance);
+		return response;
 	}
 
-	private Response createAccount(Request request) {
+	private Response createAccount(CreateAccountRequest request) {
 		BankAccount newAccount = new BankAccount();
         logger.info("New Account created uid:"+newAccount.UID);
         this.accounts.put(newAccount.UID, newAccount);
         Response response = new CreateAccountResponse(request.requestId, request.getOperationName(), newAccount.UID);
+		return response;
+	}
+	
+	private Response deposit(DepositRequest request) {
+		int accID = request.getUid();
+		int amount = request.getAmount();
+		accounts.get(accID).setBalance(amount);
+		Response response = new DepositResponse(request.requestId, accID, request.getOperationName(), Constants.OK_STATUS);
 		return response;
 	}
 }
