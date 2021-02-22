@@ -17,12 +17,12 @@ import shared.Response;
 public class TCPServerThread implements Runnable {
 
 	protected Socket s;
-	protected List<BankAccount> accounts;
+	protected RequestHandler requestHandler;
 
 	TCPServerThread (Socket s, List<BankAccount> accounts) {
-		System.out.println ("New client.");
+		System.out.println("New client.");
 		this.s = s;
-		this.accounts = accounts;
+		this.requestHandler = new RequestHandler(accounts);
 	}
 
 	public void run () {
@@ -38,13 +38,8 @@ public class TCPServerThread implements Runnable {
 			    for (;;)
 			    {
 			        Object object = ois.readObject();
-			        Request req = (Request) object;
-			        System.out.println("Request operation name:"+req.getOperationName());
-			        BankAccount newAccount = new BankAccount();
-			        System.out.println("New Account created uid:"+newAccount.UID);
-			        this.accounts.add(newAccount);
-			        
-			        Response response = new CreateAccountResponse(req.requestId, req.getOperationName(), newAccount.UID);
+			        Request request = (Request) object;
+			        Response response = this.requestHandler.handle(request);
 			        oos.writeObject(response);
 			    }
 			}
@@ -61,7 +56,6 @@ public class TCPServerThread implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			
 			System.out.println ("Client exit.");
 			s.close();
