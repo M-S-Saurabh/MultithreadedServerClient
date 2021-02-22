@@ -49,7 +49,7 @@ public class TCPClient   {
 			resultString += responseList.get(i).getUid();
 			resultString += " ";
 		}
-		logger.info("Result string: "+resultString);
+		logger.info(resultString);
 	}
 
 	private static List<CreateAccountResponse> createAccounts(int numAccounts, Socket socket) throws IOException {
