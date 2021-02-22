@@ -1,3 +1,4 @@
 /.metadata/
 /EchoClient.class
 /EchoServer.class
+*.log

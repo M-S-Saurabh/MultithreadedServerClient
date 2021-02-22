@@ -5,6 +5,8 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -28,7 +30,7 @@ public class TCPServer{
 		ServerSocket server = new ServerSocket (Integer.parseInt (args[0]));
 
 		// Accounts list
-		List<BankAccount> accounts = Collections.synchronizedList(new ArrayList<BankAccount>());
+		Map<Integer, BankAccount> accounts = Collections.synchronizedMap(new HashMap<Integer, BankAccount>());
 
 		while (true) {
 			logger.info("Waiting for a client request");

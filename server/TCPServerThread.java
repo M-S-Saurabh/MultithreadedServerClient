@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import shared.CreateAccountResponse;
@@ -21,7 +22,7 @@ public class TCPServerThread implements Runnable {
 	protected RequestHandler requestHandler;
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-	TCPServerThread (Socket s, List<BankAccount> accounts) {
+	TCPServerThread (Socket s, Map<Integer, BankAccount> accounts) {
 		logger.info("ServerThread created for new client.");
 		this.s = s;
 		this.requestHandler = new RequestHandler(accounts);

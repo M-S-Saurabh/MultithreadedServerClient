@@ -6,8 +6,7 @@ public class BankAccount {
 	private int balance;
 	
 	public BankAccount() {
-		this.UID = uidCounter;
-		uidCounter++;
+		this.UID = ++uidCounter;
 		this.setBalance(0);
 	}
 	
@@ -27,4 +26,7 @@ public class BankAccount {
 		this.balance = balance;
 	}
 	
+	public int getAccID() {
+		return this.UID;
+	}
 }
