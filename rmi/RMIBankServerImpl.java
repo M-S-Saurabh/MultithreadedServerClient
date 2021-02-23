@@ -15,7 +15,7 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 	private Hashtable<Integer, BankAccount> accounts;
-	
+
 	private static int sessionID;
 
 	public RMIBankServerImpl() throws RemoteException {
@@ -44,10 +44,10 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 		RMIBankServer bankStub = (RMIBankServer) UnicastRemoteObject.toStub(new RMIBankServerImpl());
 
 		int port = Integer.parseInt(args[0]);
-		 logger.severe(String.format("Using the supplied RMI registry port: %d",
-		 port)); Registry localRegistry = LocateRegistry.getRegistry(port);
-		 
-		 localRegistry.bind(Constants.RMI_SERVER_NAME, bankStub);
+		logger.severe(String.format("Using the supplied RMI registry port: %d", port)); 
+		Registry localRegistry = LocateRegistry.getRegistry(port);
+
+		localRegistry.bind(Constants.RMI_SERVER_NAME, bankStub);
 	}
 
 	@Override

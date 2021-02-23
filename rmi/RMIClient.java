@@ -1,11 +1,12 @@
 package rmi;
 
-import javafx.util.Pair;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,16 +62,16 @@ public class RMIClient {
 
 	
 	private static void spawnThreads(RMIBankServer bank, int threadCount, int iterationCount) throws RemoteException { 
-		List<Pair<Thread, RMIBankSession>> transferThreads = new LinkedList<>();
+		List<AbstractMap.SimpleEntry<Thread, RMIBankSession>> transferThreads = new LinkedList<>();
 		for (int i=0; i<threadCount; i++) {
 			RMIBankSession session = bank.login();
 			RMIClientThread c = new RMIClientThread(session, accountIds, iterationCount); 
 			Thread txThread = new Thread(c);
 			txThread.start();
-			transferThreads.add(new Pair<Thread, RMIBankSession>(txThread, session)); 
+			transferThreads.add(new AbstractMap.SimpleEntry<Thread, RMIBankSession>(txThread, session)); 
 		}
 		
-		for (Pair<Thread, RMIBankSession> entry: transferThreads) {
+		for (AbstractMap.SimpleEntry<Thread, RMIBankSession> entry: transferThreads) {
 			try {
 				entry.getKey().join();
 				entry.getValue().logout();
