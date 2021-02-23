@@ -1,5 +1,6 @@
 package rmi;
 
+import javafx.util.Pair;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -58,29 +59,31 @@ public class RMIClient {
 
 	}
 
-	private static void spawnThreads(RMIBankServer bankServer, int threadCount, int iterationCount) {
-		List<Thread> transferThreads = new LinkedList<>();
-		for(int i=0; i<threadCount; i++) {
-			RMIClientThread c = new RMIClientThread(bankServer, accountIds, iterationCount);
+	
+	private static void spawnThreads(RMIBankServer bank, int threadCount, int iterationCount) throws RemoteException { 
+		List<Pair<Thread, RMIBankSession>> transferThreads = new LinkedList<>();
+		for (int i=0; i<threadCount; i++) {
+			RMIBankSession session = bank.login();
+			RMIClientThread c = new RMIClientThread(session, accountIds, iterationCount); 
 			Thread txThread = new Thread(c);
 			txThread.start();
-			transferThreads.add(txThread);
+			transferThreads.add(new Pair<Thread, RMIBankSession>(txThread, session)); 
 		}
 		
-		for (Thread thread: transferThreads) {
+		for (Pair<Thread, RMIBankSession> entry: transferThreads) {
 			try {
-				thread.join();
-			} catch (InterruptedException e) {
-				logger.severe("join failed");
-				e.printStackTrace();
+				entry.getKey().join();
+				entry.getValue().logout();
+			} catch(InterruptedException e) { 
+				logger.severe("join failed"); e.printStackTrace();
 			}
-		}
-		
-	}
+	    }
+	 }
+	
 
-	private static void checkBalances(RMIBankServer bankServer) throws RemoteException {
+	private static void checkBalances(RMIBankServer bank) throws RemoteException {
 		StringBuilder sbR = new StringBuilder("Account-wise balance: ");
-		
+		RMIBankSession bankServer = bank.login();
 		int totalBalance = 0;
 		for(int accountId: accountIds) {
 			int balance = bankServer.getBalanceRMI(accountId);
@@ -88,18 +91,22 @@ public class RMIClient {
 			
 			sbR.append(String.format("%d:%d, ", accountId, balance));
 		}
+		bankServer.logout();
 		logger.info(sbR.toString());
 		logger.severe(String.format("Total balance (sum): %d", totalBalance));
 	}
 
-	private static void depositAllAccounts(RMIBankServer bankServer, int amount) throws RemoteException {
+	private static void depositAllAccounts(RMIBankServer bank, int amount) throws RemoteException {
+		RMIBankSession bankServer = bank.login();
 		for(int accountId: accountIds) {
 			bankServer.depositRMI(accountId, amount);
 		}
+		bankServer.logout();
 		logger.severe("Deposited 100$ in all accounts.");
 	}
 
-	private static void createAccounts(RMIBankServer bankServer, int numAccounts) throws RemoteException {
+	private static void createAccounts(RMIBankServer bank, int numAccounts) throws RemoteException {
+		RMIBankSession bankServer = bank.login();
 		StringBuilder sbR = new StringBuilder("Created account ids: ");
 		
 		for(int i=0; i<numAccounts; i++) {
@@ -109,7 +116,7 @@ public class RMIClient {
 			sbR.append(uid);
 			sbR.append(", ");
 		}
-		
+		bankServer.logout();
 		logger.severe(sbR.toString());
 	}
 

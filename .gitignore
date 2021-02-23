@@ -1,5 +1,5 @@
 /.metadata/
 /EchoClient.class
 /EchoServer.class
-*.log
+/logs/*.log
 /Constants.class

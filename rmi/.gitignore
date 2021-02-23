@@ -4,3 +4,7 @@
 /BankAccount.class
 /Constants.class
 /RMIClientThread.class
+/RMIBankSession.class
+/RMIBank.class
+/RMIBankImpl.class
+/RMIBankSessionImpl.class
