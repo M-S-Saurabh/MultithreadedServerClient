@@ -1,4 +1,4 @@
-package client;
+package rmi;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -11,8 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import shared.Constants;
-import shared.RMIBankServer;
+import rmi.Constants;
 
 public class RMIClient {
 	

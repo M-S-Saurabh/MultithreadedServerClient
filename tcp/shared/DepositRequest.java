@@ -1,4 +1,4 @@
-package shared;
+package tcp.shared;
 
 public class DepositRequest extends Request {
 

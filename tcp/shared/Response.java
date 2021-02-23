@@ -1,4 +1,4 @@
-package shared;
+package tcp.shared;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package client;
+package tcp.client;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -8,13 +8,13 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import shared.Constants;
-import shared.BalanceRequest;
-import shared.BalanceResponse;
-import shared.CreateAccountRequest;
-import shared.CreateAccountResponse;
-import shared.DepositRequest;
-import shared.DepositResponse;
+import tcp.shared.BalanceRequest;
+import tcp.shared.BalanceResponse;
+import tcp.shared.Constants;
+import tcp.shared.CreateAccountRequest;
+import tcp.shared.CreateAccountResponse;
+import tcp.shared.DepositRequest;
+import tcp.shared.DepositResponse;
 
 import java.io.*;
 

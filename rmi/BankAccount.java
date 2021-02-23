@@ -1,4 +1,4 @@
-package server;
+package rmi;
 
 public class BankAccount {
 	private static int uidCounter = 0;

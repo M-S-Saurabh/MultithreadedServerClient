@@ -1,19 +1,19 @@
-package server;
+package tcp.server;
 
 import java.util.Hashtable;
 import java.util.logging.Logger;
 
-import shared.Constants;
-import shared.BalanceRequest;
-import shared.BalanceResponse;
-import shared.CreateAccountRequest;
-import shared.CreateAccountResponse;
-import shared.DepositRequest;
-import shared.DepositResponse;
-import shared.Request;
-import shared.Response;
-import shared.TransferRequest;
-import shared.TransferResponse;
+import tcp.shared.BalanceRequest;
+import tcp.shared.BalanceResponse;
+import tcp.shared.Constants;
+import tcp.shared.CreateAccountRequest;
+import tcp.shared.CreateAccountResponse;
+import tcp.shared.DepositRequest;
+import tcp.shared.DepositResponse;
+import tcp.shared.Request;
+import tcp.shared.Response;
+import tcp.shared.TransferRequest;
+import tcp.shared.TransferResponse;
 
 public class RequestHandler {
 	

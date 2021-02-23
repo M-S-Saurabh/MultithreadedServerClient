@@ -1,4 +1,4 @@
-package server;
+package tcp.server;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -11,8 +11,8 @@ import java.net.SocketTimeoutException;
 import java.util.Hashtable;
 import java.util.logging.Logger;
 
-import shared.Request;
-import shared.Response;
+import tcp.shared.Request;
+import tcp.shared.Response;
 
 public class TCPServerThread implements Runnable {
 
@@ -27,7 +27,7 @@ public class TCPServerThread implements Runnable {
 	
 
 	TCPServerThread (Socket s, Hashtable<Integer, BankAccount> accounts) {
-		logger.info("ServerThread created for new client.");
+		logger.info("ServerThread created for new tcp.client.");
 		this.s = s;
 		this.threadID = THREADCOUNT;
 		this.requestHandler = new RequestHandler(accounts, this.threadID);
@@ -62,7 +62,7 @@ public class TCPServerThread implements Runnable {
 			catch (EOFException exc)
 			{
 			    // end of stream
-				logger.fine("t"+this.threadID+": End of Object stream is reached. Done with all requests from client.");
+				logger.fine("t"+this.threadID+": End of Object stream is reached. Done with all requests from tcp.client.");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				logger.severe(e.getMessage());

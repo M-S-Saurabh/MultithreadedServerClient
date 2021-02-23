@@ -1,4 +1,4 @@
-package client;
+package tcp.client;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import shared.Constants;
-import shared.TransferRequest;
-import shared.TransferResponse;
+import tcp.shared.Constants;
+import tcp.shared.TransferRequest;
+import tcp.shared.TransferResponse;
 
 public class TCPClientThread implements Runnable {
 	
@@ -45,7 +45,7 @@ public class TCPClientThread implements Runnable {
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
-			logger.severe("Could not create file streams from client thread socket.");
+			logger.severe("Could not create file streams from tcp.client thread socket.");
 		}
 		
 		for(int i=0; i<iterationCount; i++) {

@@ -1,4 +1,4 @@
-package server;
+package tcp.server;
 /* Author:  Anand Tripathi - Example program code for CSCI 5105 Spring 2021     */
 
 import java.net.*;
@@ -30,7 +30,7 @@ public class TCPServer{
 		Hashtable<Integer, BankAccount> accounts = new Hashtable<Integer, BankAccount>(100);
 
 		while (true) {
-			logger.info("Waiting for a client request");
+			logger.info("Waiting for a tcp.client request");
 			Socket client = server.accept();
 			logger.info( "Received request from " + client.getInetAddress ());
 			logger.info( "Starting worker thread..." );

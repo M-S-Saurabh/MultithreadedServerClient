@@ -1,4 +1,5 @@
-package shared;
+package tcp.shared;
+
 
 public final class Constants {
 	private Constants() {
@@ -20,8 +21,5 @@ public final class Constants {
 	
 	// Failure reason strings
 	public static final String INSUFFICIENT_BALANCE = "In-sufficient balance in source account.";
-	
-	// RMI stub name used on registry.
-	public static final String RMI_SERVER_NAME = "MyRMIBankServer";
 	
 }
