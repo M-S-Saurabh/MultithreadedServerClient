@@ -157,17 +157,15 @@ public class TCPClient   {
 		
 		// Parse results and calculate sum of all balances.
 		// Write results into logs.
-		StringBuilder sbB = new StringBuilder("Checking balance:");
+		StringBuilder sbR = new StringBuilder("Checking balance. Account-wise balance: ");
 	    int total = 0;
 	    for (BalanceResponse response: responseList) {
-			/*
-			 * sbB.append("account: "); sbB.append(response.getUid());
-			 * sbB.append(" balance: "); sbB.append(response.getBalance());
-			 * sbB.append("\n");
-			 */
-	    	total += response.getBalance();
+	    	int balance = response.getBalance();
+	    	total += balance;
+	    	
+	    	sbR.append(String.format("%d:%d, ", response.getUid(), balance));
 	    }
-	    logger.info(sbB.toString());
+	    logger.info(sbR.toString());
 	    logger.info("Total balance is: "+total);
 	}
 }
