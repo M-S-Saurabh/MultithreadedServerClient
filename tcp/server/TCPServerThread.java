@@ -55,30 +55,30 @@ public class TCPServerThread implements Runnable {
 			catch (SocketTimeoutException exc)
 			{
 			    // you got the timeout
-				logger.severe("t"+this.threadID+": connection timeout");
+				logger.severe("t"+this.threadID+"|: connection timeout");
 				exc.printStackTrace();
 				logger.severe(exc.getMessage());
 			}
 			catch (EOFException exc)
 			{
 			    // end of stream
-				logger.fine("t"+this.threadID+": End of Object stream is reached. Done with all requests from tcp.client.");
+				logger.info("t"+this.threadID+"|: End of Object stream is reached. Done with all requests from tcp.client.");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				logger.severe(e.getMessage());
 			}
 			
-			logger.info("t"+this.threadID+": Client exit. ServerThread exit.");
+			logger.info("t|"+this.threadID+"|: Client exit. ServerThread exit.");
 			s.close();
 		} catch (IOException ex) {
 			ex.printStackTrace ();
-			logger.severe("t"+this.threadID+": "+ex.getMessage());
+			logger.severe("t"+this.threadID+"|: "+ex.getMessage());
 		} finally {
 			try {
 				s.close ();
 			} catch (IOException ex) {
 				ex.printStackTrace ();
-				logger.severe("t"+this.threadID+": "+ex.getMessage());
+				logger.severe("t"+this.threadID+"|: "+ex.getMessage());
 			}
 		}
 	}

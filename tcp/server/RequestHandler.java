@@ -55,15 +55,19 @@ public class RequestHandler {
 	}
 	
 	private Response transfer(TransferRequest request) {
+		
 		BankAccount source = accounts.get(request.getSource());
 		BankAccount target = accounts.get(request.getTarget());
 		int amount = request.getAmount();
 		
+		logger.info("t"+this.threadID+": request to transfer amount:" + amount + " from account uid: " + source.UID +" to account uid: " + target.UID);
 		TransferResponse response = new TransferResponse(request.requestId, request.getOperationName(), Constants.OK_STATUS);
 		
 		if(amount <= source.getBalance()) {
 			source.setBalance(source.getBalance() - amount);
 			target.setBalance(target.getBalance() + amount);
+			logger.info("t"+this.threadID+"|r"+request.requestId+": transfer amount:" + amount
+					+ " from account uid: " + source.UID +" to account uid: " + target.UID + " status: "+Constants.OK_STATUS);
 		}else {
 			response.setStatus(Constants.FAIL_STATUS);
 			response.setMessage(Constants.INSUFFICIENT_BALANCE);
@@ -80,7 +84,7 @@ public class RequestHandler {
 
 	private Response createAccount(CreateAccountRequest request) {
 		BankAccount newAccount = new BankAccount();
-        logger.fine("t"+this.threadID+"|r"+request.requestId+": New Account created uid:"+newAccount.UID);
+        logger.info("t"+this.threadID+"|r"+request.requestId+": New Account created uid:"+newAccount.UID);
         this.accounts.put(newAccount.UID, newAccount);
         Response response = new CreateAccountResponse(request.requestId, request.getOperationName(), newAccount.UID);
 		return response;

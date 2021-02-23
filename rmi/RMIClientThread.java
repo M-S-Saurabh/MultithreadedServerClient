@@ -44,7 +44,7 @@ public class RMIClientThread implements Runnable {
 					logger.severe(String.format("Transfer request failed. SourceID:%d TargetID:%d", first, second));
 					logger.severe(String.format("Failure Reason: %s", Constants.INSUFFICIENT_BALANCE));
 				}else {
-					logger.fine(String.format("Transfer of 10$ from id:%d to id:%d successful.", first, second));
+					logger.info(String.format("Transfer of 10$ from id:%d to id:%d status:%s", first, second, status));
 				}
 				
 			} catch (RemoteException e) {

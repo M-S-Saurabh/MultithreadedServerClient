@@ -22,7 +22,7 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 	
 	public RMIBankSessionImpl(Hashtable<Integer, BankAccount> accounts, int sessionID) throws RemoteException {
 		super();
-		logger.info("server session created:"+sessionID);
+		logger.info("s|"+this.sessionID+"|server session created: s"+sessionID);
 		this.accounts = accounts;
 		this.sessionID = sessionID;
 	}
@@ -30,7 +30,7 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 	@Override
 	public int createAccountRMI() throws RemoteException {
 		BankAccount newAccount = new BankAccount();
-        logger.info("New Account created uid:"+newAccount.UID);
+        logger.info("s|"+this.sessionID+"|New Account created uid: "+newAccount.UID);
         accounts.put(newAccount.UID, newAccount);
 		return newAccount.UID;
 	}
@@ -39,6 +39,7 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 	public String depositRMI(int uid, int amount) throws RemoteException {
 		BankAccount account = accounts.get(uid);
 		account.setBalance(account.getBalance() + amount);
+		logger.info("s|"+this.sessionID+"|deposite amount: "+amount+" to uid:"+account.UID+ " with status:"+ Constants.OK_STATUS);
 		return Constants.OK_STATUS;
 	}
 
@@ -46,7 +47,7 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 	public int getBalanceRMI(int uid) throws RemoteException {
 		BankAccount account = accounts.get(uid);
 		if(account == null) {
-			logger.severe(String.format("Acccount with id:%d could not be found.", uid));
+			logger.severe(String.format("s|"+this.sessionID+"|Acccount with id:%d could not be found.", uid));
 			return -1;
 		}else {
 			return account.getBalance();
@@ -58,11 +59,12 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 		BankAccount source = accounts.get(sourceId);
 		BankAccount target = accounts.get(targetId);
 		if(source.getBalance() < amount) {
-			logger.severe(String.format("Transfer failed: %s", Constants.INSUFFICIENT_BALANCE));
+			logger.severe(String.format("s|"+this.sessionID+"|Transfer failed: %s", Constants.INSUFFICIENT_BALANCE));
 			return Constants.FAIL_STATUS;
 		}else {
 			source.setBalance(source.getBalance() - amount);
 			target.setBalance(target.getBalance() + amount);
+			logger.info("s|"+this.sessionID+"|transfer amount: "+amount+" from uid:"+sourceId+ " to uid:"+targetId+ " with status:"+ Constants.OK_STATUS);
 			return Constants.OK_STATUS;
 		}
 	}

@@ -16,7 +16,7 @@ public class TCPServer{
 			throw new RuntimeException ("Syntax: EchoServer port-number");
 		
 		// This block configure the logger with handler and formatter  
-        FileHandler fh = new FileHandler("./logs/TCPServerLog.log");  
+        FileHandler fh = new FileHandler("./logs/TCP_serverLogfile.log");  
         logger.addHandler(fh);
         System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
         SimpleFormatter formatter = new SimpleFormatter();  

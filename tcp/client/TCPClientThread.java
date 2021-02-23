@@ -57,7 +57,7 @@ public class TCPClientThread implements Runnable {
 			while(second == first) {
 				second = accountIds.get(random.nextInt(accountIds.size()));
 			}
-			
+			logger.info(String.format("Initiating Transfer of 10$ from id:%d to id:%d", first, second));
 			try {
 				oos.writeObject(new TransferRequest(first, second, 10));
 				TransferResponse response = (TransferResponse) oin.readObject();
@@ -66,7 +66,7 @@ public class TCPClientThread implements Runnable {
 					logger.severe(String.format("Transfer request failed. SourceID:%d TargetID:%d", first, second));
 					logger.severe(String.format("Failure Reason: %s", response.getMessage()));
 				}else {
-					logger.fine(String.format("Transfer of 10$ from id:%d to id:%d successful.", first, second));
+					logger.info(String.format("Transfer of 10$ from id:%d to id:%d status:%s.", first, second, response.getStatus()));
 				}
 				
 			} catch (IOException e) {

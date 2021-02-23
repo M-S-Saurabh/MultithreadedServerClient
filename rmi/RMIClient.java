@@ -1,6 +1,5 @@
 package rmi;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -14,11 +13,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import rmi.Constants;
-
 public class RMIClient {
 	
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 	private static List<Integer> accountIds;
 
 	public static void main(String[] args) throws SecurityException, IOException{
@@ -26,7 +24,7 @@ public class RMIClient {
 			throw new RuntimeException ("Syntax: RMIClient <hostname> <port> <threadCount> <iterationCount>");
 		
 		// This block configure the logger with handler and formatter  
-        FileHandler fh = new FileHandler("./logs/RMIClientLog.log");  
+        FileHandler fh = new FileHandler("./logs/RMI_clientLogfile.log");  
         logger.addHandler(fh);
         System.setProperty("java.util.logging.SimpleFormatter.format", Constants.LOG_FORMAT);
         SimpleFormatter formatter = new SimpleFormatter();  
@@ -103,7 +101,7 @@ public class RMIClient {
 			bankServer.depositRMI(accountId, amount);
 		}
 		bankServer.logout();
-		logger.severe("Deposited 100$ in all accounts.");
+		logger.info("Deposited 100$ in all accounts.");
 	}
 
 	private static void createAccounts(RMIBankServer bank, int numAccounts) throws RemoteException {
@@ -118,7 +116,7 @@ public class RMIClient {
 			sbR.append(", ");
 		}
 		bankServer.logout();
-		logger.severe(sbR.toString());
+		logger.info(sbR.toString());
 	}
 
 }

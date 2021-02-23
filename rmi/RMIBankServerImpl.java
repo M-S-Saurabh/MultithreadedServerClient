@@ -12,11 +12,13 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankServer {
-	private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+	private static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 	private Hashtable<Integer, BankAccount> accounts;
 
 	private static int sessionID;
+
 
 	public RMIBankServerImpl() throws RemoteException {
 		super();
@@ -28,12 +30,13 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 		if (args.length != 1)
 			throw new RuntimeException("Syntax: RMIBankServerImpl <port>");
 
-		// This block configure the logger with handler and formatter
-		FileHandler fh = new FileHandler("./logs/RMIServerLog.log");
-		logger.addHandler(fh);
+	
+		  // This block configure the logger with handler and formatter FileHandler fh
+		FileHandler fh = new FileHandler("./logs/RMI_serverLogfile.log"); logger.addHandler(fh);
 		System.setProperty("java.util.logging.SimpleFormatter.format", Constants.LOG_FORMAT);
 		SimpleFormatter formatter = new SimpleFormatter();
-		fh.setFormatter(formatter);
+	    fh.setFormatter(formatter);
+		
 
 		System.setProperty("java.security.policy", "file:./security.policy");
 

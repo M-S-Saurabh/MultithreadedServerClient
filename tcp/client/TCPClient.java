@@ -35,7 +35,7 @@ public class TCPClient   {
 	    accountIds = new ArrayList<Integer>();
 		
 		// This block configure the logger with handler and formatter  
-        FileHandler fh = new FileHandler("./logs/TCPClientLog.log");  
+        FileHandler fh = new FileHandler("./logs/TCP_clientLogfile.log");  
         logger.addHandler(fh);
         System.setProperty("java.util.logging.SimpleFormatter.format", "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
         SimpleFormatter formatter = new SimpleFormatter();  
