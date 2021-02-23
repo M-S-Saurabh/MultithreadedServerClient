@@ -79,7 +79,6 @@ public class TCPClient   {
 			try {
 				thread.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				logger.severe("join failed");
 				e.printStackTrace();
 			}

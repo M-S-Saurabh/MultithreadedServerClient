@@ -6,6 +6,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -19,8 +20,8 @@ public class RMIClient {
 	private static List<Integer> accountIds;
 
 	public static void main(String[] args) throws SecurityException, IOException{
-		if (args.length != 2)
-			throw new RuntimeException ("Syntax: RMIClient <hostname> <port>");
+		if (args.length != 4)
+			throw new RuntimeException ("Syntax: RMIClient <hostname> <port> <threadCount> <iterationCount>");
 		
 		// This block configure the logger with handler and formatter  
         FileHandler fh = new FileHandler("./logs/RMIClientLog.log");  
@@ -45,12 +46,36 @@ public class RMIClient {
 			
 			checkBalances(bankServer);
 			
+			spawnThreads(bankServer, Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+			
+			checkBalances(bankServer);
+			
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			logger.severe("Couldn't establish RMI registry connection.");
 			logger.severe(e.getMessage());
 			e.printStackTrace();
 		}
 
+	}
+
+	private static void spawnThreads(RMIBankServer bankServer, int threadCount, int iterationCount) {
+		List<Thread> transferThreads = new LinkedList<>();
+		for(int i=0; i<threadCount; i++) {
+			RMIClientThread c = new RMIClientThread(bankServer, accountIds, iterationCount);
+			Thread txThread = new Thread(c);
+			txThread.start();
+			transferThreads.add(txThread);
+		}
+		
+		for (Thread thread: transferThreads) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				logger.severe("join failed");
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	private static void checkBalances(RMIBankServer bankServer) throws RemoteException {
