@@ -46,6 +46,7 @@ public class TCPClient   {
 		
 		logger.info("Connecting to " + host + ":" + port + "..");
 
+		// This socket is used to communication related to the main thread.
 		Socket socket = new Socket (host, port);
 		OutputStream out = socket.getOutputStream ();
 		ObjectOutputStream oos = new ObjectOutputStream(out);
@@ -65,16 +66,19 @@ public class TCPClient   {
 		
 		int threadCount = Integer.parseInt(args[2]);
 		int iterationCount = Integer.parseInt(args[3]);
-		// Spawn off threads to do the transfer tasks.
 		
+		// Spawn off threads to do the transfer tasks.
 		List<Thread> transferThreads = new LinkedList<>();
 		for(int i=0; i<threadCount; i++) {
+			// Each new thread has its own socket to handle communication.
 			TCPClientThread c = new TCPClientThread(accountIds, iterationCount, new Socket (host, port));
 			Thread txThread = new Thread(c);
 			txThread.start();
 			transferThreads.add(txThread);
 		}
 		
+		// Join (block) until all threads are done.
+		// i.e. all transfer operations are completed.
 		for (Thread thread: transferThreads) {
 			try {
 				thread.join();
@@ -91,8 +95,11 @@ public class TCPClient   {
 		socket.close();
 	}
 
+	/*
+	 * Makes requests to creates the specified number of bank accounts.
+	 */
 	private static void createAccounts(int numAccounts, ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
-	
+		// Stores all responses to log them and indicate any failures.
 		List<CreateAccountResponse> responseList = new ArrayList<CreateAccountResponse>();
 		
 		for (int i=0; i < numAccounts; i++) {
@@ -117,6 +124,9 @@ public class TCPClient   {
 		logger.info(sbR.toString());
 	}
 	
+	/*
+	 * Makes requests to deposit 100$ in each bank account.
+	 */
 	private static void depositInAccount(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
 	
 		List<DepositResponse> responseList = new ArrayList<DepositResponse>();
@@ -142,6 +152,9 @@ public class TCPClient   {
 	    logger.info(sbD.toString());
 	}
 	
+	/*
+	 * Makes requests to check balance of each account and also print a totalBalance sum.
+	 */
 	private static void checkBalance(ObjectInputStream oin, ObjectOutputStream oos) throws IOException {
 		List<BalanceResponse> responseList = new ArrayList<BalanceResponse>();
 		
