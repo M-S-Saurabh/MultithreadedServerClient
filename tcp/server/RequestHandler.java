@@ -23,12 +23,18 @@ public class RequestHandler {
 	
 	protected Hashtable<Integer, BankAccount> accounts;
 	
-	
+	/*
+	 * Each thread calls its own request handler object.
+	 */
 	public RequestHandler(Hashtable<Integer, BankAccount> accounts, int threadID) {
 		this.accounts = accounts;
 		this.threadID = threadID;
 	}
 	
+	/*
+	 * This method processes all kinds of requests.
+	 * It calls the right function based on the field operationName
+	 */
 	Response handle(Request request) {
 		String operationName = request.getOperationName();
 		logger.finer("t"+this.threadID+"|r"+request.requestId+": Request operation name:"+operationName);

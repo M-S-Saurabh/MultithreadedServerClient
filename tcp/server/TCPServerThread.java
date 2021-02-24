@@ -20,6 +20,7 @@ public class TCPServerThread implements Runnable {
 	
 	private static int THREADCOUNT = 1;
 	
+	// Just an id to uniquely identify thread. Used to identify which thread wrote the log.
 	private int threadID;
 	
 	protected Socket s;
@@ -43,7 +44,7 @@ public class TCPServerThread implements Runnable {
 			ObjectOutputStream oos = new ObjectOutputStream( ostream );
 			
 			try
-			{
+			{	// Infinite loop until all client requests are processed.
 			    for (;;)
 			    {
 			        Object object = ois.readObject();

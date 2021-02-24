@@ -25,7 +25,7 @@ public class TCPServer{
 		logger.info("Starting on port " + args[0]);
 		ServerSocket server = new ServerSocket (Integer.parseInt (args[0]));
 
-		// Accounts list
+		// Maintain a set of all accounts. This is where all the acccounts data is stored.
 		Hashtable<Integer, BankAccount> accounts = new Hashtable<Integer, BankAccount>(100);
 
 		while (true) {
@@ -33,6 +33,8 @@ public class TCPServer{
 			Socket client = server.accept();
 			logger.info( "Received request from " + client.getInetAddress ());
 			logger.info( "Starting worker thread..." );
+			
+			// Create a separate server thread to handle every new client connection.
 			TCPServerThread c = new TCPServerThread(client, accounts);
 			new Thread(c).start();
 		}
