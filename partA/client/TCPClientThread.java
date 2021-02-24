@@ -1,4 +1,10 @@
-package tcp.client;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.client;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,9 +16,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import tcp.shared.Constants;
-import tcp.shared.TransferRequest;
-import tcp.shared.TransferResponse;
+import partA.shared.Constants;
+import partA.shared.TransferRequest;
+import partA.shared.TransferResponse;
 
 public class TCPClientThread implements Runnable {
 	
@@ -45,7 +51,7 @@ public class TCPClientThread implements Runnable {
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
-			logger.severe("Could not create file streams from tcp.client thread socket.");
+			logger.severe("Could not create file streams from partA.client thread socket.");
 		}
 		
 		for(int i=0; i<iterationCount; i++) {

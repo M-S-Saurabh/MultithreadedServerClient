@@ -1,5 +1,14 @@
-package rmi;
-
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.server;
+/*
+ * The main data-structure to store details of a bank account.
+ * Exposes basic account operations which are listed in requirements.
+ */
 public class BankAccount {
 	private static int uidCounter = 0;
 	public final int UID;

@@ -1,4 +1,10 @@
-package tcp.shared;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.shared;
 
 public class DepositResponse extends Response {
 

@@ -1,11 +1,17 @@
-package rmi;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partB;
 
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import tcp.shared.Constants;
+import partA.shared.Constants;
 
 public class RMIClientThread implements Runnable {
 	
@@ -48,7 +54,7 @@ public class RMIClientThread implements Runnable {
 				}
 				
 			} catch (RemoteException e) {
-				logger.severe("Couldn't invoke rmi transfer method.");
+				logger.severe("Couldn't invoke partB transfer method.");
 				logger.severe(e.getMessage());
 				e.printStackTrace();
 			}

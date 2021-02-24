@@ -1,4 +1,10 @@
-package tcp.client;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.client;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -8,13 +14,13 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import tcp.shared.BalanceRequest;
-import tcp.shared.BalanceResponse;
-import tcp.shared.Constants;
-import tcp.shared.CreateAccountRequest;
-import tcp.shared.CreateAccountResponse;
-import tcp.shared.DepositRequest;
-import tcp.shared.DepositResponse;
+import partA.shared.BalanceRequest;
+import partA.shared.BalanceResponse;
+import partA.shared.Constants;
+import partA.shared.CreateAccountRequest;
+import partA.shared.CreateAccountResponse;
+import partA.shared.DepositRequest;
+import partA.shared.DepositResponse;
 
 import java.io.*;
 

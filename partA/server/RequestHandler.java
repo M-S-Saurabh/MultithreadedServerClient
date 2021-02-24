@@ -1,19 +1,25 @@
-package tcp.server;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.server;
 
 import java.util.Hashtable;
 import java.util.logging.Logger;
 
-import tcp.shared.BalanceRequest;
-import tcp.shared.BalanceResponse;
-import tcp.shared.Constants;
-import tcp.shared.CreateAccountRequest;
-import tcp.shared.CreateAccountResponse;
-import tcp.shared.DepositRequest;
-import tcp.shared.DepositResponse;
-import tcp.shared.Request;
-import tcp.shared.Response;
-import tcp.shared.TransferRequest;
-import tcp.shared.TransferResponse;
+import partA.shared.BalanceRequest;
+import partA.shared.BalanceResponse;
+import partA.shared.Constants;
+import partA.shared.CreateAccountRequest;
+import partA.shared.CreateAccountResponse;
+import partA.shared.DepositRequest;
+import partA.shared.DepositResponse;
+import partA.shared.Request;
+import partA.shared.Response;
+import partA.shared.TransferRequest;
+import partA.shared.TransferResponse;
 
 public class RequestHandler {
 	

@@ -1,4 +1,10 @@
-package tcp.server;
+/*******************************************************************************
+ * Authors:
+ * ---------
+ * Saurabh Mylavaram (mylav008@umn.edu)
+ * Edwin Nellickal (nelli053@umn.edu)
+ ******************************************************************************/
+package partA.server;
 
 import java.net.*;
 import java.util.Hashtable;
@@ -29,7 +35,7 @@ public class TCPServer{
 		Hashtable<Integer, BankAccount> accounts = new Hashtable<Integer, BankAccount>(100);
 
 		while (true) {
-			logger.info("Waiting for a tcp.client request");
+			logger.info("Waiting for a partA.client request");
 			Socket client = server.accept();
 			logger.info( "Received request from " + client.getInetAddress ());
 			logger.info( "Starting worker thread..." );
