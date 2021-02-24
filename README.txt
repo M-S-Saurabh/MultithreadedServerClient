@@ -13,20 +13,20 @@ TCP Server Client
 1. CD into the main directory with the name "MultithreadedServerClient"
 
 2. To compile server and client programs use the following commands:
-		javac ./tcp/server/TCPServer.java
-		javac ./tcp/client/TCPClient.java
+		javac ./partA/server/TCPServer.java
+		javac ./partA/client/TCPClient.java
 
 3. First, run the TCP server using:
-		java tcp.server.TCPServer <port-number>
+		java partA.server.TCPServer <port-number>
 
    Here, replace <port-number> with any integer port number. For example:
-   		java tcp.server.TCPServer 9091
+   		java partA.server.TCPServer 9091
 
 4. Then run the TCP client use:
-		java tcp.client.TCPClient <host-name> <port-number> <thread-count> <iteration-count>
+		java partA.client.TCPClient <host-name> <port-number> <thread-count> <iteration-count>
 
    Replace respective options in this command. For example:
-   		java tcp.client.TCPClient localhost 9091 10 5
+   		java partA.client.TCPClient localhost 9091 10 5
 
 RMI Server Client
 -----------------
@@ -34,8 +34,8 @@ RMI Server Client
 1. CD into the main directory with the name "MultithreadedServerClient"
 
 2. To compile server and client programs use the following commands:
-		javac ./rmi/RMIBankServerImpl.java
-		javac ./rmi/RMIClient.java
+		javac ./partB/RMIBankServerImpl.java
+		javac ./partB/RMIClient.java
 
 3. First, run the rmiregistry on some port using:
 		rmiregistry <port-number>
@@ -44,14 +44,14 @@ RMI Server Client
 	Remember this should be run in the main directory which has the name "MultithreadedServerClient".
 
 4. Next run the RMI server using the same port number which is used to run rmiregistry:
-		java rmi.RMIBankServerImpl <port-number>
+		java partB.RMIBankServerImpl <port-number>
 
-	Example: java rmi.RMIBankServerImpl 1099
+	Example: java partB.RMIBankServerImpl 1099
 
 5. Finally run the RMI client using the command:
-		java rmi.RMIClient <host-name> <port-number> <thread-count> <iteration-count>
+		java partB.RMIClient <host-name> <port-number> <thread-count> <iteration-count>
 
-	Example: java rmi.RMIClient localhost 1099 10 5
+	Example: java partB.RMIClient localhost 1099 10 5
 
 ------------------------------------------------------------------------------------------------------
 
