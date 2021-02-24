@@ -2,5 +2,4 @@
 /EchoClient.class
 /EchoServer.class
 /logs/*.log
-/logs/*.log.*
 /Constants.class
