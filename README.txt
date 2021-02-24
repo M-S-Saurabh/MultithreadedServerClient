@@ -4,10 +4,6 @@
 # Saurabh Mylavaram (mylav008@umn.edu)
 # Edwin Nellickal (nelli053@umn.edu)
 #-------------------------------------------------------------------------------
-Authors:
----------
-Saurabh Mylavaram (mylav008@umn.edu)
-Edwin Nellickal (nelli053@umn.edu)
 
 HOW TO RUN:
 ------------------------------------------------------------------------------------------------------
