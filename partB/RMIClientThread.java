@@ -17,7 +17,7 @@ public class RMIClientThread implements Runnable {
 	
 	public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-	private RMIBankSession session;
+	private RMIBankSession session; // one session per client thread
 	private List<Integer> accountIds;
 	private int iterationCount;
 	private Random random;

@@ -75,6 +75,7 @@ public class RMIBankSessionImpl extends UnicastRemoteObject implements RMIBankSe
 		}
 	}
 
+	// we achieve the closing of an RMI thread by calling logout which unexports the object instance
 	@Override
 	public void logout() throws RemoteException {
 		// TODO Auto-generated method stub

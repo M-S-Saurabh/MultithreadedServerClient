@@ -33,9 +33,9 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 	}
 
 	public static void main(String[] args) throws SecurityException, IOException, AlreadyBoundException {
-		if (args.length != 1)
+		if (args.length != 1) {
 			throw new RuntimeException("Syntax: RMIBankServerImpl <port>");
-
+		}
 	
 		  // This block configure the logger with handler and formatter FileHandler fh
 		FileHandler fh = new FileHandler("./logs/RMI_serverLogfile.log"); logger.addHandler(fh);
@@ -43,13 +43,14 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 		SimpleFormatter formatter = new SimpleFormatter();
 	    fh.setFormatter(formatter);
 		
-
+	    // setting the security policy
 		System.setProperty("java.security.policy", "file:./security.policy");
 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
 		}
-
+		
+		// the stub that is exposed via the RMI registry
 		RMIBankServer bankStub = (RMIBankServer) UnicastRemoteObject.toStub(new RMIBankServerImpl());
 
 		int port = Integer.parseInt(args[0]);
@@ -57,6 +58,7 @@ public class RMIBankServerImpl extends UnicastRemoteObject implements RMIBankSer
 		Registry localRegistry = LocateRegistry.getRegistry(port);
 
 		localRegistry.bind(Constants.RMI_SERVER_NAME, bankStub);
+		// setting up bindings
 	}
 
 	@Override

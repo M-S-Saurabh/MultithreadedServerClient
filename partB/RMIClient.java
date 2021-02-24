@@ -41,19 +41,24 @@ public class RMIClient {
         System.setProperty("java.security.policy","file:./security.policy");
 		
         System.setSecurityManager(new SecurityManager());
-		try {
+		try { // trying to get the bankserver stub from the RMI registry
 			RMIBankServer bankServer = (RMIBankServer) Naming.lookup(
 					String.format("rmi://%s:%s/%s", args[0], args[1], Constants.RMI_SERVER_NAME)
 			);
 			
+			// to create all accounts
 			createAccounts(bankServer, 100);
 			
+			// to deposite montey in all accounts
 			depositAllAccounts(bankServer, 100);
 			
+			// to check balances of all accounts
 			checkBalances(bankServer);
 			
+			// perform transfers between accounts
 			spawnThreads(bankServer, Integer.parseInt(args[2]), Integer.parseInt(args[3]));
 			
+			// check balance in the end
 			checkBalances(bankServer);
 			
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
@@ -67,6 +72,7 @@ public class RMIClient {
 	
 	private static void spawnThreads(RMIBankServer bank, int threadCount, int iterationCount) throws RemoteException { 
 		List<AbstractMap.SimpleEntry<Thread, RMIBankSession>> transferThreads = new LinkedList<>();
+		// create threads and create a session for each thread
 		for (int i=0; i<threadCount; i++) {
 			RMIBankSession session = bank.login();
 			RMIClientThread c = new RMIClientThread(session, accountIds, iterationCount); 
@@ -75,6 +81,7 @@ public class RMIClient {
 			transferThreads.add(new AbstractMap.SimpleEntry<Thread, RMIBankSession>(txThread, session)); 
 		}
 		
+		// wait for the client threads to complete by calling join
 		for (AbstractMap.SimpleEntry<Thread, RMIBankSession> entry: transferThreads) {
 			try {
 				entry.getKey().join();
@@ -102,26 +109,26 @@ public class RMIClient {
 	}
 
 	private static void depositAllAccounts(RMIBankServer bank, int amount) throws RemoteException {
-		RMIBankSession bankServer = bank.login();
+		RMIBankSession bankServer = bank.login(); // create a session
 		for(int accountId: accountIds) {
-			bankServer.depositRMI(accountId, amount);
+			bankServer.depositRMI(accountId, amount); //deposit money into the account
 		}
-		bankServer.logout();
+		bankServer.logout(); // close a session
 		logger.info("Deposited 100$ in all accounts.");
 	}
 
 	private static void createAccounts(RMIBankServer bank, int numAccounts) throws RemoteException {
-		RMIBankSession bankServer = bank.login();
+		RMIBankSession bankServer = bank.login(); // create a session
 		StringBuilder sbR = new StringBuilder("Created account ids: ");
 		
 		for(int i=0; i<numAccounts; i++) {
-			int uid = bankServer.createAccountRMI();
+			int uid = bankServer.createAccountRMI(); // create account via RMI call
 			accountIds.add(uid);
 			
 			sbR.append(uid);
 			sbR.append(", ");
 		}
-		bankServer.logout();
+		bankServer.logout(); // close session
 		logger.info(sbR.toString());
 	}
 
